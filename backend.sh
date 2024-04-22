@@ -43,7 +43,7 @@ then
    useradd expense &>>$LOGFILE
    VALIDATE "$?" "Creating expense user"
 else
-   echo -e "Expense user created... $R SKIPPING $N"
+   echo -e "Expense user created... $Y SKIPPING $N"
 fi
 
 mkdir -p /app
@@ -54,7 +54,6 @@ VALIDATE "$?" "Downloading backend code"
 
 cd /app
 rm -rf /app*
-
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE "$?" "Extracted backend code"
 
@@ -76,7 +75,7 @@ VALIDATE "$?" "Enabling backend"
 dnf install mysql -y &>>$LOGFILE
 VALIDATE "$?" "Installing mysql client"
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -p${mysql_root_expense} < /app/schema/backend.sql &>>$LOGFILE
+mysql -h db.rithinexpense.online -uroot -p${mysql_root_expense} < /app/schema/backend.sql &>>$LOGFILE
 VALIDATE "$?" "Schema loading"
 
 
