@@ -28,17 +28,17 @@ then
 else
     echo "your a root user"
 fi
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOGFILE
 VALIDATE "$?" "Disabling default nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>$LOGFILE
 VALIDATE "$?" "Enabling nodejs:20 Version"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>$LOGFILE
 VALIDATE "$?" "Installing nodejs"
 
 id expense &>>$LOGFILE
-if [ $id -ne 0 ]
+if [$id -ne 0]
 then
    useradd expense &>>$LOGFILE
    VALIDATE "$?" "Creating expense user"
