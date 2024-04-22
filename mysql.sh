@@ -38,7 +38,7 @@ systemctl start mysqld &>> $LOGFILE
 VALIDATE "$?" "starting mysql server"
 
 mysql -h db.rithinexpense.online -uroot -p${mysql_root_expense} -e 'show databases;' &>> $LOGFILE
-if [ $? -ne 0]
+if [ $? -ne 0 ]
 then
    mysql_secure_installation --set-root-pass ${mysql_root_expense}
    VALIDATE "$?" "setting up root password"
