@@ -37,7 +37,13 @@ VALIDATE "$?" "Enabling mysql server"
 systemctl start mysqld &>> $LOGFILE
 VALIDATE "$?" "starting mysql server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDATE "$?" "setting up root password"
+mysql -h db.rithinexpense.online -uroot -p${mysql_root_expense} -e 'show databases;' &>> $LOGFILE
+if [ $? -ne o ]
+then
+   mysql_secure_installation --set-root-pass ${mysql_root_expense}
+   VALIDATE "$?" "setting up root password"
+else
+ echo -e "Mysql root password is already setup...$Y SKIPPING $N"
+fi
 
 
