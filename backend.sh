@@ -38,7 +38,7 @@ dnf install nodejs -y &>>$LOGFILE
 VALIDATE "$?" "Installing nodejs"
 
 id expense &>>$LOGFILE
-if [$id -ne 0]
+if [ $id -ne 0 ]
 then
    useradd expense &>>$LOGFILE
    VALIDATE "$?" "Creating expense user"
